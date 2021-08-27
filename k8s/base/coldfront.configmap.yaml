@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coldfront-configmap
+data:
+  DEBUG: "True"
+  DB_HOST: "database-mariadb"
+  DB_URL: "mysql://coldfront:lwrjcFE1pA@database-mariadb:3306/my_database"
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""

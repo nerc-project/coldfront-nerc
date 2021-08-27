@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coldfront
+  template:
+    spec:
+      containers:
+      - name: coldfront
+        image: knikolla/coldfront:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: coldfront-configmap
