@@ -1,0 +1,3 @@
+git+https://github.com/ubccr/coldfront#egg=coldfront
+git+https://github.com/knikolla/coldfront-plugin-openstack#egg=coldfront_plugin_openstack
+mysqlclient
