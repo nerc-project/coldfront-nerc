@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: database
+  namespace: default
+spec:
+  destination:
+    namespace: coldfront
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+        - name: auth.database
+          value: coldfront
+        - name: auth.username
+          value: coldfront
+        - name: auth.password
+          value: nomoresecret
+    chart: mariadb
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 9.4.3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
