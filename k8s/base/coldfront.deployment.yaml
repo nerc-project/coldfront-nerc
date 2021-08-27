@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: coldfront
-        image: knikolla/coldfront:latest
+        image: ghcr.io/nerc-project/coldfront-nerc:main
         ports:
         - containerPort: 8080
         envFrom:
