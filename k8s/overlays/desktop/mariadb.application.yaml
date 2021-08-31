@@ -2,9 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: coldfront-database
+  namespace: argocd
 spec:
   destination:
-    namespace: argocd
+    namespace: coldfront
     server: https://kubernetes.default.svc
   project: default
   source:
