@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coldfront-database
+spec:
+  source:
+    helm:
+      parameters:
+        - name: auth.database
+          value: coldfront
+        - name: auth.username
+          value: coldfront
+        - name: auth.password
+          value: nomoresecret
+        - name: global.storageClass
+          value: ocs-storagecluster-ceph-rbd
+        - name: primary.persistence.storageClass
+          value: ocs-storagecluster-ceph-rbd
+        - name: secondary.persistence.storageClass
+          value: ocs-storagecluster-ceph-rbd

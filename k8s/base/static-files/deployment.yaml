@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-static-files-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coldfront
+      coldfront-deployment: coldfront-static-files
+  template:
+    spec:
+      initContainers:
+      - name: coldfront-static-files-copy
+        image: 'ghcr.io/nerc-project/coldfront-nerc:main'
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c", "STATIC_ROOT=/webroot/static /opt/venv/bin/django-admin.py collectstatic"]
+        volumeMounts:
+        - name: coldfront-static-files
+          mountPath: /webroot
+      containers:
+      - name: coldfront-static-files-nginx
+        image: 'nginxinc/nginx-unprivileged:latest'
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: coldfront-static-files
+          mountPath: /usr/share/nginx/html
+      volumes:
+        - name: coldfront-static-files
+          emptyDir: {}

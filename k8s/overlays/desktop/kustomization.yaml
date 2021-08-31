@@ -1,5 +1,0 @@
-bases:
-  - ../../base
-resources:
-  - namespace.yaml
-  - mariadb.application.yaml
