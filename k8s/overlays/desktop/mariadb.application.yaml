@@ -16,6 +16,12 @@ spec:
           value: coldfront
         - name: auth.password
           value: nomoresecret
+        - name: global.storageClass
+          value: ocs-storagecluster-ceph-rbd
+        - name: primary.persistence.storageClass
+          value: ocs-storagecluster-ceph-rbd
+        - name: secondary.persistence.storageClass
+          value: ocs-storagecluster-ceph-rbd
     chart: mariadb
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 9.4.3
