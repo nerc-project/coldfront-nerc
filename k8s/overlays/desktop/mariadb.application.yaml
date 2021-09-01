@@ -22,6 +22,14 @@ spec:
           value: ocs-storagecluster-ceph-rbd
         - name: secondary.persistence.storageClass
           value: ocs-storagecluster-ceph-rbd
+        - name: primary.podSecurityContext.fsGroup
+          value: '1000700001'
+        - name: primary.containerSecurityContext.runAsUser
+          value: '1000700001'
+        - name: secondary.podSecurityContext.fsGroup
+          value: '1000700001'
+        - name: secondary.containerSecurityContext.runAsUser
+          value: '1000700001'
     chart: mariadb
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 9.4.3
