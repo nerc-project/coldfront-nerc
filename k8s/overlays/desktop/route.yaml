@@ -5,10 +5,7 @@ metadata:
   namespace: coldfront
 spec:
   port:
-    targetPort: https
-  tls:
-    insecureEdgeTerminationPolicy: Redirect
-    termination: passthrough
+    targetPort: http
   to:
     kind: Service
     name: coldfront
