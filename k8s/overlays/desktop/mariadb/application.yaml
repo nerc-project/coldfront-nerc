@@ -4,6 +4,7 @@ metadata:
   name: coldfront-database
 spec:
   destination:
+    namespace: coldfront
     server: https://kubernetes.default.svc
   project: default
   source:
