@@ -4,6 +4,7 @@ metadata:
   name: coldfront
   namespace: coldfront
 spec:
+  host: coldfront
   port:
     targetPort: http
   to:

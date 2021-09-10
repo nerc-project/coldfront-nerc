@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-static-files-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coldfront-static-files
+  template:
+    spec:
+			initContainers:
+      - name: coldfront-static-files-copy
+        image: ghcr.io/nerc-project/coldfront-nerc:main
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c", "cp -r $(/opt/venv/bin/python -c 'from coldfront import static; print(static.__path__._path[0])') /static"]
+        volumeMounts:
+        - name: coldfront-static-files
+          mountPath: /static
+      containers:
+      - name: coldfront-staticfiles
+        image: nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: coldfront-static-files
+          mountPath: /usr/share/nginx/html
+        - name: coldfront-static-files-nginx-config
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: coldfront-static-files
+          emptyDir: {}
+        - name: config-static-files-nginx-config
+          configMap:
+            name: config-static-files-nginx-config

@@ -1,0 +1,7 @@
+commonLabels:
+  app: coldfront-app
+namespace: coldfront
+resources:
+- configmap.yaml
+- deployment.yaml
+- service.yaml
