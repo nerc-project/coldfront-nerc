@@ -3,6 +3,7 @@ kind: Route
 metadata:
   name: coldfront-static-files
 spec:
+  host: 'coldfront-nerc.testing'
   path: '/static'
   port:
     targetPort: http

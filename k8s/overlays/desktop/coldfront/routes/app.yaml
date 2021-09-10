@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: coldfront
 spec:
-  path: '/'
+  host: 'coldfront-nerc.testing'
   port:
     targetPort: http
   to:
