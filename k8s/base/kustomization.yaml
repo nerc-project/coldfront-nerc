@@ -1,5 +1,5 @@
 commonLabels:
-  app: coldfront-app
+  app: coldfront
 resources:
 - namespace.yaml
 - app

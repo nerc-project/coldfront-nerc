@@ -9,5 +9,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: coldfront-app
+    app: coldfront
     coldfront-deployment: coldfront-app
