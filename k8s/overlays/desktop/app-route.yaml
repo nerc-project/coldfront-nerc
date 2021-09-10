@@ -2,9 +2,8 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: coldfront
-  namespace: coldfront
 spec:
-  host: coldfront
+  path: '/'
   port:
     targetPort: http
   to:

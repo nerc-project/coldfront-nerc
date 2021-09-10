@@ -4,13 +4,12 @@ metadata:
   name: coldfront-static-files
   namespace: coldfront
 spec:
-  host: coldfront
   path: '/static'
   port:
     targetPort: http
   to:
     kind: Service
-    name: coldfront-static
+    name: coldfront-static-files
     weight: 100
   tls:
     termination: edge
