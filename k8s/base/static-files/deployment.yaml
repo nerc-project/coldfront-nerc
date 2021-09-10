@@ -11,26 +11,21 @@ spec:
     spec:
 			initContainers:
       - name: coldfront-static-files-copy
-        image: ghcr.io/nerc-project/coldfront-nerc:main
+        image: 'ghcr.io/nerc-project/coldfront-nerc:main'
         imagePullPolicy: Always
         command: ["/bin/sh", "-c", "cp -r $(/opt/venv/bin/python -c 'from coldfront import static; print(static.__path__._path[0])') /static"]
         volumeMounts:
         - name: coldfront-static-files
           mountPath: /static
       containers:
-      - name: coldfront-staticfiles
-        image: nginx:latest
+      - name: coldfront-static-files-nginx
+        image: 'nginxinc/nginx-unprivileged:latest'
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         volumeMounts:
         - name: coldfront-static-files
           mountPath: /usr/share/nginx/html
-        - name: coldfront-static-files-nginx-config
-          mountPath: /etc/nginx/conf.d
       volumes:
         - name: coldfront-static-files
           emptyDir: {}
-        - name: config-static-files-nginx-config
-          configMap:
-            name: config-static-files-nginx-config

@@ -4,8 +4,3 @@ namespace: coldfront
 resources:
 - deployment.yaml
 - service.yaml
-
-configMapGenerator:
-- name: coldfront-static-files-nginx-config
-  files:
-    - nginx
