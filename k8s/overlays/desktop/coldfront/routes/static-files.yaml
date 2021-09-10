@@ -2,7 +2,6 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: coldfront-static-files
-  namespace: coldfront
 spec:
   path: '/static'
   port:

@@ -1,5 +1,4 @@
-bases:
-  - ../../base/app
-  - ../../base/static-files
+resources:
+  - ../../base
   - coldfront
   - mariadb

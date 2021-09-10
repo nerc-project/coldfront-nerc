@@ -1,0 +1,7 @@
+commonLabels:
+  app: coldfront-app
+resources:
+- namespace.yaml
+- app
+- static-files
+namespace: coldfront

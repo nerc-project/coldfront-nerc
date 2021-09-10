@@ -4,7 +4,6 @@ metadata:
   name: coldfront-database
 spec:
   destination:
-    namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   source:
