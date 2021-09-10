@@ -1,0 +1,5 @@
+namespace: coldfront
+resources:
+  - namespace.yaml
+  - routes/app.yaml
+  - routes/static-files.yaml
