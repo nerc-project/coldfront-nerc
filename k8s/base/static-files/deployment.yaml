@@ -2,11 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: coldfront-static-files-deployment
+  labels:
+    test: hello
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: coldfront-static-files
+      app: coldfront-app
+      coldfront-deployment: coldfront-static-files
   template:
     spec:
       initContainers:

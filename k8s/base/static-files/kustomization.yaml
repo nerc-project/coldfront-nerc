@@ -1,5 +1,5 @@
-commonLabels:
-  app: coldfront-static-files
 resources:
 - deployment.yaml
 - service.yaml
+commonLabels:
+  coldfront-deployment: coldfront-static-files

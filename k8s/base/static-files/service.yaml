@@ -9,4 +9,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: coldfront-static-files
+    app: coldfront-app
+    coldfront-deployment: coldfront-static-files
