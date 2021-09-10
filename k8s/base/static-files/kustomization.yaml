@@ -1,6 +1,5 @@
 commonLabels:
   app: coldfront-static-files
-namespace: coldfront
 resources:
 - deployment.yaml
 - service.yaml

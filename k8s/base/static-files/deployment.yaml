@@ -9,7 +9,7 @@ spec:
       app: coldfront-static-files
   template:
     spec:
-			initContainers:
+      initContainers:
       - name: coldfront-static-files-copy
         image: 'ghcr.io/nerc-project/coldfront-nerc:main'
         imagePullPolicy: Always

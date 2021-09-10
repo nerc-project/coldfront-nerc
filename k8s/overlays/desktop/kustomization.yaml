@@ -1,6 +1,9 @@
 bases:
-  - ../../base
+  - ../../base/app
+  - ../../base/static-files
+namespace: coldfront
 resources:
   - namespace.yaml
-  - route.yaml
+  - app-route.yaml
+  - static-files-route.yaml
   - mariadb.application.yaml
