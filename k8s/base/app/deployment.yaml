@@ -7,11 +7,13 @@ spec:
   selector:
     matchLabels:
       app: coldfront
+      coldfront-deployment: coldfront-app
   template:
     spec:
       containers:
       - name: coldfront
         image: ghcr.io/nerc-project/coldfront-nerc:main
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

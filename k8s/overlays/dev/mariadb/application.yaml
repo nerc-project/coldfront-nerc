@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: database
-  namespace: default
+  name: coldfront-database
 spec:
   destination:
     namespace: coldfront
@@ -24,5 +23,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
