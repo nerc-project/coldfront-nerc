@@ -8,7 +8,8 @@ in addition to creating the user](
 https://github.com/ubccr/coldfront/blob/master/coldfront/plugins/mokey_oidc/auth.py)
 with the `uid` claim set as the username.
 
-Set the following environment variables
+Set the following environment variables specified below.
+
 ```bash
 PLUGIN_AUTH_OIDC="True"
 PLUGIN_MOKEY="True"
@@ -20,4 +21,15 @@ OIDC_OP_AUTHORIZATION_ENDPOINT="https://<keycloak_url>/auth/realms/<realm>/proto
 OIDC_OP_TOKEN_ENDPOINT="https://<keycloak_url>/auth/realms/<realm>/protocol/openid-connect/token"
 OIDC_OP_USER_ENDPOINT="https://<keycloak_url>/auth/<realm>/master/protocol/openid-connect/userinfo"
 OIDC_OP_JWKS_ENDPOINT="https://<keycloak_url>/auth/<realm>/master/protocol/openid-connect/certs"
+```
+
+In addition, using the `coldfront_plugin_keycloak_usersearch` plugin, it is
+possible to search users directly from keycloak. This plugin is enabled by
+default in `coldfront-nerc` and requires the environment variables defined below.
+
+```bash
+KEYCLOAK_URL=""  # without a trailing slash
+KEYCLOAK_USER=""
+KEYCLOAK_PASS=""
+KEYCLOAK_REALM=""
 ```

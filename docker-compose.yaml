@@ -8,6 +8,8 @@ services:
     image: knikolla/coldfront:latest
     environment:
       DEBUG: "True"
+      INITIAL_SETUP: "False"
+      LOAD_TEST_DATA: "False"
       SECRET_KEY: "klajsfkljasdfkljasdfkljadsfjklads"
       DB_HOST: coldfront-database
       DB_URL: mysql://coldfront:nomoresecret@coldfront-database:3306/coldfront
@@ -15,9 +17,6 @@ services:
       OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
       PLUGIN_AUTH_OIDC: "True"
       PLUGIN_MOKEY: "True"
-      SESSION_COOKIE_NAME: "coldfront_login123"
-      SESSION_COOKIE_SECURE: "False"
-      SESSION_COOKIE_SAMESITE: "Lax"
       OIDC_RP_SIGN_ALGO: RS256
       OIDC_RP_SCOPES: "openid email profile"
       OIDC_RP_CLIENT_ID: coldfront
@@ -27,6 +26,11 @@ services:
       OIDC_OP_USER_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/userinfo"
       OIDC_OP_JWKS_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/certs"
       OIDC_VERIFY_SSL: "False"
+      KEYCLOAK_URL: "http://keycloak:8080"
+      KEYCLOAK_USER: "admin"
+      KEYCLOAK_PASS: "nomoresecret"
+      KEYCLOAK_REALM: "master"
+      ADDITIONAL_USER_SEARCH_CLASSES: "coldfront_plugin_keycloak_usersearch.search.KeycloakUserSearch"
     ports:
       - "8080:8080"
 
