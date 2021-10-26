@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: coldfront
 spec:
-  host: 'coldfront-nerc.testing'
+  host: 'coldfront.apps.nerc-shift-1.rc.fas.harvard.edu'
   port:
     targetPort: http
   to:
