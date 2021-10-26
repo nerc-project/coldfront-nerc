@@ -11,4 +11,9 @@ sleep 10
 python -m django initial_setup
 python -m django register_openstack_attributes
 
-python -m gunicorn coldfront.config.wsgi -b 0.0.0.0:8080
+if [[ "$DEBUG" == "True" ]]
+then
+  python -m django runserver 0.0.0.0:8080
+else
+  python -m gunicorn coldfront.config.wsgi -b 0.0.0.0:8080
+fi

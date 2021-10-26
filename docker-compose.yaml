@@ -2,27 +2,60 @@ version: "3"
 
 services:
   coldfront-dev:
-    container_name: coldfront
     build:
       context: .
       dockerfile: Dockerfile
     image: knikolla/coldfront:latest
-    ports:
-      - "8080:8080"  # host:container
     environment:
       DEBUG: "True"
+      SECRET_KEY: "klajsfkljasdfkljasdfkljadsfjklads"
       DB_HOST: coldfront-database
       DB_URL: mysql://coldfront:nomoresecret@coldfront-database:3306/coldfront
       OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
       OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
+      PLUGIN_AUTH_OIDC: "True"
+      PLUGIN_MOKEY: "True"
+      SESSION_COOKIE_NAME: "coldfront_login123"
+      SESSION_COOKIE_SECURE: "False"
+      SESSION_COOKIE_SAMESITE: "Lax"
+      OIDC_RP_SIGN_ALGO: RS256
+      OIDC_RP_SCOPES: "openid email profile"
+      OIDC_RP_CLIENT_ID: coldfront
+      OIDC_RP_CLIENT_SECRET: f4fcef30-5688-426d-9b93-83fd817f9f0d
+      OIDC_OP_AUTHORIZATION_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/auth"
+      OIDC_OP_TOKEN_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/token"
+      OIDC_OP_USER_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/userinfo"
+      OIDC_OP_JWKS_ENDPOINT: "https://keycloak:8443/auth/realms/master/protocol/openid-connect/certs"
+      OIDC_VERIFY_SSL: "False"
+    ports:
+      - "8080:8080"
 
   coldfront-database:
-    container_name: coldfront-mariadb
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: nomoresecret
       MYSQL_DATABASE: coldfront
       MYSQL_USER: coldfront
       MYSQL_PASSWORD: nomoresecret
+
+  keycloak:
+    image: jboss/keycloak:latest
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: nomoresecret
+      DB_VENDOR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: "nomoresecret"
+      DB_ADDR: "keycloak-database"
+      JAVA_OPTS: "-server -Xms128m -Xmx1024m -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=512m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"
     ports:
-      - "3306:3306"
+      - "8081:8080"  # host:container
+      - "8443:8443"
+
+  keycloak-database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: nomoresecret

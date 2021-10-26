@@ -10,3 +10,4 @@ include(plugin_openstack.get_filename())
 
 if os.getenv('DEBUG', 'False') == 'True':
     SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = 'Lax'
