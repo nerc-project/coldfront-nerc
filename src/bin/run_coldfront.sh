@@ -8,8 +8,16 @@ while ! echo exit | nc $DB_HOST 3306; do sleep 5; done
 
 sleep 10
 
-python -m django initial_setup
-python -m django register_openstack_attributes
+if [[ "$INITIAL_SETUP" == "True" ]]
+then
+  python -m django initial_setup
+  python -m django register_openstack_attributes
+fi
+
+if [[ "$LOAD_TEST_DATA" == "True" ]]
+then
+  python -m django load_test_data
+fi
 
 if [[ "$DEBUG" == "True" ]]
 then
