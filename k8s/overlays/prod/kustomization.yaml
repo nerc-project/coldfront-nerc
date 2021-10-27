@@ -1,5 +1,7 @@
 resources:
-  - ../dev
+  - ../../base
+  - ../dev/mariadb
   - coldfront
 patchesStrategicMerge:
-  - mariadb/application.yaml
+  - patches/mariadb-application.yaml
+  - patches/coldfront-deployment.yaml
