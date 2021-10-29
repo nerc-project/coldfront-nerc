@@ -2,5 +2,6 @@ git+https://github.com/ubccr/coldfront#egg=coldfront
 git+https://github.com/knikolla/coldfront-plugin-openstack#egg=coldfront_plugin_openstack
 git+https://github.com/knikolla/coldfront-plugin-keycloak-usersearch@0a5b0be1eff4c9d4565d1a25ba80dbca45624a87#egg=coldfront_plugin_keycloak_usersearch
 mysqlclient
+psycopg2
 mozilla-django-oidc
 gunicorn
