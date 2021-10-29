@@ -2,10 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: coldfront-configmap
-  namespace: coldfront
 data:
   DEBUG: "True"
-  DB_HOST: "coldfront-database-mariadb.coldfront"
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
   PLUGIN_AUTH_OIDC: "True"
