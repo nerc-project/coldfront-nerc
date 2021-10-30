@@ -23,7 +23,7 @@ FROM python:3.9-slim-bullseye
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        netcat libmariadb3 && \
+        netcat libmariadb3 libpq5 && \
     apt-get clean -y
 
 COPY --from=builder --chown=1001:0 /opt/venv /opt/venv
