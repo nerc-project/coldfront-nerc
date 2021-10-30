@@ -8,28 +8,31 @@ spec:
       containers:
       - name: coldfront
         env:
-          - name: _DB_USER
-            valueFrom:
-              secretKeyRef:
-                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
-                key: user
-          - name: _DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
-                key: password
-          - name: DB_HOST
+          - name: DATABASE_HOST
             valueFrom:
               secretKeyRef:
                 name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
                 key: host
-          - name: _DB_NAME
+          - name: DATABASE_PORT
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: port
+          - name: DATABASE_NAME
             valueFrom:
               secretKeyRef:
                 name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
                 key: dbname
-          - name: DB_URL
-            value: psql://$(_DB_USER):$(_DB_PASSWORD)@$(DB_HOST)/$(_DB_NAME)
+          - name: DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: user
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: password
         envFrom:
         - configMapRef:
             name: coldfront-configmap
