@@ -2,11 +2,16 @@
 
 set -xe
 
-DATABASE_PORT=${DATABASE_PORT:-3306}
+if [[ $DB_URL == psql* ]];
+then
+DB_PORT=5432
+else
+DB_PORT=3306
+fi
 
 >&2 echo "Waiting for database..."
 
-while ! echo exit | nc $DATABASE_HOST $DATABASE_PORT; do sleep 5; done
+while ! echo exit | nc $DB_HOST $DB_PORT; do sleep 5; done
 >&2 echo "Database is up - Starting"
 
 sleep 10
