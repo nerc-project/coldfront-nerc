@@ -4,7 +4,11 @@ metadata:
   name: coldfront-configmap
 data:
   DEBUG: "True"
-  DB_HOST: "coldfront-database-mariadb.coldfront"
-  DB_URL: "mysql://coldfront:nomoresecret@coldfront-database-mariadb.coldfront:3306/coldfront"
+  DATABASE_ENGINE: 'django.db.backends.mysql'
+  DATABASE_HOST: 'coldfront-database-mariadb.coldfront'
+  DATABASE_PORT: 3306
+  DATABASE_NAME: 'coldfront'
+  DATABASE_USER: 'coldfront'
+  DATABASE_PASSWORD: 'nomoresecret'
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""

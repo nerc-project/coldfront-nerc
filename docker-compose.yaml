@@ -11,8 +11,12 @@ services:
       INITIAL_SETUP: "False"
       LOAD_TEST_DATA: "False"
       SECRET_KEY: "klajsfkljasdfkljasdfkljadsfjklads"
-      DB_HOST: coldfront-database
-      DB_URL: mysql://coldfront:nomoresecret@coldfront-database:3306/coldfront
+      DATABASE_ENGINE: 'django.db.backends.mysql'
+      DATABASE_HOST: 'coldfront-database'
+      DATABASE_PORT: 3306
+      DATABASE_NAME: 'coldfront'
+      DATABASE_USER: 'coldfront'
+      DATABASE_PASSWORD: 'nomoresecret'
       OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
       OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
       PLUGIN_AUTH_OIDC: "True"
