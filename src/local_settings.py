@@ -15,3 +15,17 @@ ADDITIONAL_USER_SEARCH_CLASSES = ["coldfront_plugin_keycloak_usersearch.search.K
 if os.getenv('DEBUG', 'False') == 'True':
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_SAMESITE = 'Lax'
+
+DATABASES = {
+    'default': {
+        'ENGINE': ENV.get_value(
+            'DATABASE_ENGINE',
+            default='django.db.backends.mysql'
+        ),
+        'NAME': ENV.get_value('DATABASE_NAME', default='coldfront'),
+        'USER': ENV.get_value('DATABASE_USER'),
+        'PASSWORD': ENV.get_value('DATABASE_PASSWORD'),
+        'HOST': ENV.get_value('DATABASE_HOST'),
+        'PORT': ENV.get_value('DATABASE_PORT', default=3306),
+    },
+}
