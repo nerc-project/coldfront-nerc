@@ -18,3 +18,4 @@ data:
   OIDC_AUTHENTICATION_CALLBACK_URL: "https://coldfront.apps.nerc-shift-1.rc.fas.harvard.edu/oidc/callback/"
   KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
   KEYCLOAK_REALM: 'mss'
+  FORWARDED_ALLOW_IPS: '*'
