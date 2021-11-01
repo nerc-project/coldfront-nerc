@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: coldfront-configmap
 data:
-  DEBUG: "True"
+  DEBUG: "False"
   DATABASE_ENGINE: 'django.db.backends.postgresql'
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
