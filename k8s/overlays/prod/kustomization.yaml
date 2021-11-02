@@ -1,5 +1,10 @@
+namespace: coldfront
 resources:
-  - ../dev
-  - coldfront
+  - configmap.yaml
+  - secrets.yaml
+  - ha-postgres.yaml
+  - ../../base
+  - routes/app.yaml
+  - routes/static-files.yaml
 patchesStrategicMerge:
-  - mariadb/application.yaml
+  - patches/coldfront-deployment.yaml

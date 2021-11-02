@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coldfront-configmap
+data:
+  DEBUG: "True"
+  DATABASE_ENGINE: 'django.db.backends.mysql'
+  DATABASE_HOST: 'coldfront-database-mariadb.coldfront'
+  DATABASE_PORT: 3306
+  DATABASE_NAME: 'coldfront'
+  DATABASE_USER: 'coldfront'
+  DATABASE_PASSWORD: 'nomoresecret'
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""

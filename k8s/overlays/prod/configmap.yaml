@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coldfront-configmap
+data:
+  DEBUG: "False"
+  DATABASE_ENGINE: 'django.db.backends.postgresql'
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
+  PLUGIN_AUTH_OIDC: "True"
+  PLUGIN_MOKEY: "True"
+  OIDC_RP_SIGN_ALGO: RS256
+  OIDC_RP_SCOPES: "openid email profile"
+  OIDC_OP_AUTHORIZATION_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/auth"
+  OIDC_OP_TOKEN_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/token"
+  OIDC_OP_USER_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/userinfo"
+  OIDC_OP_JWKS_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/certs"
+  OIDC_AUTHENTICATION_CALLBACK_URL: "https://coldfront.apps.nerc-shift-1.rc.fas.harvard.edu/oidc/callback/"
+  KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
+  KEYCLOAK_REALM: 'mss'
+  FORWARDED_ALLOW_IPS: '*'
