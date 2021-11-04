@@ -15,6 +15,13 @@ spec:
         image: 'ghcr.io/nerc-project/coldfront-nerc:main'
         imagePullPolicy: Always
         command: ["/bin/sh", "-c", "STATIC_ROOT=/webroot/static /opt/venv/bin/django-admin.py collectstatic"]
+        env:
+          - name: DATABASE_HOST
+            value: ''
+          - name: DATABASE_USER
+            value: ''
+          - name: DATABASE_PASSWORD
+            value: ''
         volumeMounts:
         - name: coldfront-static-files
           mountPath: /webroot
