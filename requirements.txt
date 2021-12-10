@@ -1,5 +1,5 @@
 git+https://github.com/ubccr/coldfront@f282f4ea2da30654c3b2ff496a4aff0b1c0dbdd7#egg=coldfront
-git+https://github.com/nerc-project/coldfront-plugin-openstack@cb84bea1b4b7c0690e0e4f7ce730f4510a0ded9c#egg=coldfront_plugin_openstack
+git+https://github.com/nerc-project/coldfront-plugin-openstack@3b25ad95681452987c2d8fa699dc128e1346827d#egg=coldfront_plugin_openstack
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@0dd8e0ae65211d2f145abfd8d1402efe96562d29#egg=coldfront_plugin_keycloak_usersearch
 mysqlclient
 psycopg2 >= 2.8, < 2.9
