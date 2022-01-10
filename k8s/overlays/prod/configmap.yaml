@@ -19,3 +19,4 @@ data:
   KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
   KEYCLOAK_REALM: 'mss'
   FORWARDED_ALLOW_IPS: '*'
+  REDIS_HOST: 'coldfront-redis'

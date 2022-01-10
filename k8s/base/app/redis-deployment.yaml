@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coldfront-redis
+      coldfront-deployment: coldfront-redis-app
+  template:
+    spec:
+      containers:
+        - name: coldfront-redis
+          image: redis:6.2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6379

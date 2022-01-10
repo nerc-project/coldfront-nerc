@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-qcluster-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coldfront-qcluster
+      coldfront-deployment: coldfront-qcluster-app
+  template:
+    spec:
+      containers:
+        - name: coldfront-qcluster
+          image: ghcr.io/nerc-project/coldfront-nerc:main
+          imagePullPolicy: Always
+          command: ["python"]
+          args: ["-m", "django", "qcluster"]
+          envFrom:
+            - configMapRef:
+                name: coldfront-configmap
