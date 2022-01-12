@@ -1,10 +1,10 @@
 namespace: coldfront
 resources:
   - configmap.yaml
-  - secrets.yaml
+  - secrets/coldfront.yaml
+  - secrets/coldfront-tls.yaml
   - ha-postgres.yaml
   - ../../base
-  - routes/app.yaml
-  - routes/static-files.yaml
+  - ingress.yaml
 patchesStrategicMerge:
   - patches/coldfront-deployment.yaml
