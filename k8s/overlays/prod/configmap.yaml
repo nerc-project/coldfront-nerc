@@ -15,7 +15,7 @@ data:
   OIDC_OP_TOKEN_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/token"
   OIDC_OP_USER_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/userinfo"
   OIDC_OP_JWKS_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/certs"
-  OIDC_AUTHENTICATION_CALLBACK_URL: "https://coldfront.apps.nerc-shift-1.rc.fas.harvard.edu/oidc/callback/"
+  OIDC_AUTHENTICATION_CALLBACK_URL: "https://coldfront.mss.mghpcc.org/oidc/callback/"
   KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
   KEYCLOAK_REALM: 'mss'
   FORWARDED_ALLOW_IPS: '*'
