@@ -12,6 +12,10 @@ include(plugin_keycloak_usersearch.get_filename())
 
 ADDITIONAL_USER_SEARCH_CLASSES = ["coldfront_plugin_keycloak_usersearch.search.KeycloakUserSearch"]
 
+# ColdFront upstream ignores the env var even though it exposes the setting.
+# https://github.com/ubccr/coldfront/blob/c490acddd2853a39201ebc58d3ba0d2c1eb8f623/coldfront/config/core.py#L80
+ACCOUNT_CREATION_TEXT = os.getenv('ACCOUNT_CREATION_TEXT')
+
 if os.getenv('DEBUG', 'False') == 'True':
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_SAMESITE = 'Lax'
