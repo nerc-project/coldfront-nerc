@@ -27,5 +27,5 @@ if [[ "$DEBUG" == "True" ]]
 then
   python -m django runserver 0.0.0.0:8080
 else
-  python -m gunicorn coldfront.config.wsgi -b 0.0.0.0:8080
+  python -m gunicorn coldfront.config.wsgi -b 0.0.0.0:8080 --capture-output
 fi
