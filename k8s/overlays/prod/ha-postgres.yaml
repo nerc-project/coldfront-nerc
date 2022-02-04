@@ -27,8 +27,15 @@ spec:
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.35-0
+      manual:
+        repoName: repo1
+        options:
+         - --type=full
       repos:
       - name: repo1
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
         volume:
           volumeClaimSpec:
             accessModes:
