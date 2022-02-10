@@ -6,9 +6,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: coldfront-redis
+      app: coldfront
       coldfront-deployment: coldfront-redis-app
   template:
+    metadata:
+      labels:
+        app: coldfront
+        coldfront-deployment: coldfront-redis-app
     spec:
       containers:
         - name: coldfront-redis

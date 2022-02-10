@@ -9,11 +9,17 @@ spec:
       app: coldfront
       coldfront-deployment: coldfront-app
   template:
+    metadata:
+      labels:
+        app: coldfront
+        coldfront-deployment: coldfront-app
     spec:
       containers:
       - name: coldfront
-        image: ghcr.io/nerc-project/coldfront-nerc:main
-        imagePullPolicy: Always
+        # image: ghcr.io/nerc-project/coldfront-nerc:main
+        # imagePullPolicy: Always
+        image: culbert/coldfront:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         envFrom:

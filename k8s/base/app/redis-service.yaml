@@ -4,7 +4,7 @@ metadata:
   name: coldfront-redis
 spec:
   ports:
-    - name: Redis
+    - name: redis
       port: 6379
       protocol: TCP
       targetPort: 6379

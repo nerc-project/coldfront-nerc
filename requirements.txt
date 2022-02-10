@@ -1,7 +1,14 @@
-git+https://github.com/ubccr/coldfront@7dc4391c0cb54ec85ff82a0199ff0461454d5fb0#egg=coldfront
-git+https://github.com/nerc-project/coldfront-plugin-openstack@9c931e4e9d4898eab3631c29be161c17db648e13#egg=coldfront_plugin_openstack
+
+git+https://github.com/ubccr/coldfront@dec5c215a78d5477c0e27882d7127ecfabb429ab#egg=coldfront
+#git+https://github.com/ubccr/coldfront@7dc4391c0cb54ec85ff82a0199ff0461454d5fb0#egg=coldfront
+#git+https://github.com/nerc-project/coldfront-plugin-openstack@9c931e4e9d4898eab3631c29be161c17db648e13#egg=coldfront_plugin_openstack
+git+https://github.com/nerc-project/coldfront-plugin-openstack@ccaaca9783fd566b213335b8f71fd2511c0079ae#egg=coldfront_plugin_openstack
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@0dd8e0ae65211d2f145abfd8d1402efe96562d29#egg=coldfront_plugin_keycloak_usersearch
 mysqlclient
 psycopg2 >= 2.8, < 2.9
 mozilla-django-oidc
 gunicorn
+#
+boto3
+rgwadmin
+watchgod
