@@ -27,8 +27,18 @@ spec:
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.35-0
+      configuration:
+      - secret:
+          name: pgo-s3-conf
+      # - secret:
+      #     name: pgo-pgbackrest-secrets
+      global:
+        # repo1-cipher-type: aes-256-cbc
+        # repo2-cipher-type: aes-256-cbc
+        repo2-path: /pgbackrest/postgres-operator/coldfront-postgres-ha/repo2
+        repo2-s3-uri-style: path
       manual:
-        repoName: repo1
+        repoName: repo2
         options:
          - --type=full
       repos:
@@ -43,6 +53,14 @@ spec:
             resources:
               requests:
                 storage: 5Gi
+      - name: repo2
+        schedules:
+          full: "0 1 * * *"
+          incremental: "0 */4 * * *"
+        s3:
+          bucket: "nerc-shift-1-backups"
+          endpoint: "holecs.rc.fas.harvard.edu"
+          region: "us-east-1"
   proxy:
     pgBouncer:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:centos8-1.15-3
