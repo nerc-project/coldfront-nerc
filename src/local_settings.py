@@ -1,6 +1,5 @@
 import os
 import pkgutil
-import secrets
 
 from coldfront.config.settings import *
 
