@@ -16,10 +16,8 @@ spec:
     spec:
       containers:
       - name: coldfront
-        # image: ghcr.io/nerc-project/coldfront-nerc:main
-        # imagePullPolicy: Always
-        image: culbert/coldfront:latest
-        imagePullPolicy: Never
+        image: ghcr.io/nerc-project/coldfront-nerc:main
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         envFrom:

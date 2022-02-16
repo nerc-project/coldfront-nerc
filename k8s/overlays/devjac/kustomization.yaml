@@ -1,5 +1,0 @@
-namespace: coldfront
-resources:
-  - ../prod
-patchesStrategicMerge:
-  - config-patch.yaml
