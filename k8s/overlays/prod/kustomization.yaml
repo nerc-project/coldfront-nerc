@@ -3,6 +3,8 @@ resources:
   - configmap.yaml
   - secrets/coldfront.yaml
   - secrets/coldfront-tls.yaml
+  - secrets/pgo-s3-conf.yaml
+  - secrets/pgo-pgbackrest-secrets.yaml
   - ha-postgres.yaml
   - ../../base
   - ingress.yaml
