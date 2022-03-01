@@ -19,6 +19,7 @@ data:
   KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
   KEYCLOAK_REALM: 'mss'
   FORWARDED_ALLOW_IPS: '*'
+  REDIS_HOST: 'coldfront-redis'
   CENTER_NAME: "New England Research Cloud"
   CENTER_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
   ACCOUNT_CREATION_TEXT: >

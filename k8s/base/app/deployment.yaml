@@ -9,6 +9,10 @@ spec:
       app: coldfront
       coldfront-deployment: coldfront-app
   template:
+    metadata:
+      labels:
+        app: coldfront
+        coldfront-deployment: coldfront-app
     spec:
       containers:
       - name: coldfront

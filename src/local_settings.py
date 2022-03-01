@@ -35,3 +35,20 @@ DATABASES = {
         'PORT': ENV.get_value('DATABASE_PORT', default=3306),
     },
 }
+
+if ENV.get_value('REDIS_HOST', default=None):
+    Q_CLUSTER = {
+        'name': 'coldfront',
+        'workers': 4,
+        'recycle': 500,
+        'timeout': 60,
+        'compress': True,
+        'save_limit': 250,
+        'queue_limit': 500,
+        'cpu_affinity': 1,
+        'label': 'Django Q',
+        'redis': {
+            'host': ENV.get_value('REDIS_HOST'),
+            'port': 6379,
+            'db': 0, }
+    }

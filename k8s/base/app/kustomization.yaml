@@ -1,5 +1,7 @@
 resources:
   - deployment.yaml
+  - redis-deployment.yaml
   - service.yaml
-commonLabels:
-  coldfront-deployment: coldfront-app
+  - redis-service.yaml
+  - qcluster-deployment.yaml
+
