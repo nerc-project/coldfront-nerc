@@ -30,3 +30,7 @@ data:
   EMAIL_PORT: '587'
   EMAIL_TICKET_SYSTEM_ADDRESS: 'help@nese.mghpcc.org'
   EMAIL_ADMIN_LIST: 'help@nese.mghpcc.org'
+  EMAIL_SENDER: 'help@nese.mghpcc.org'
+  EMAIL_DIRECTOR_EMAIL_ADDRESS: 'help@nese.mghpcc.org'
+  EMAIL_PROJECT_REVIEW_CONTACT: 'help@nese.mghpcc.org'
+  EMAIL_DEVELOPMENT_EMAIL_LIST: 'help@nese.mghpcc.org'
