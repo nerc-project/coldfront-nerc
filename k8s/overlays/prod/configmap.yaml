@@ -24,3 +24,9 @@ data:
   CENTER_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
   ACCOUNT_CREATION_TEXT: >
     Any faculty, staff, student, or external collaborator must request an user account through the <a href="https://regapp.mss.mghpcc.org/" target="_blank">MGHPCC Shared Services (MGHPCC-SS) Account Portal</a>. For more information, please see the <a href="https://nerc.mghpcc.org/user-guides/" target="_blank">user guides</a>.
+  EMAIL_ENABLED: 'True'
+  EMAIL_USE_TLS: 'True'
+  EMAIL_HOST: 'email-smtp.us-east-1.amazonaws.com'
+  EMAIL_PORT: 587
+  EMAIL_TICKET_SYSTEM_ADDRESS: 'help@nese.mghpcc.org'
+  EMAIL_ADMIN_LIST: 'help@nese.mghpcc.org'
