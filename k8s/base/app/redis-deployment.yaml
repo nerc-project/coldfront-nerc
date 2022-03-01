@@ -20,3 +20,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 6379
+          command:
+            - 'redis-server'
+          args:
+            - '--save'
+            - '""'
+            - '--appendonly'
+            - 'no'
