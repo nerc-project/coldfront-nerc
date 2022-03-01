@@ -27,6 +27,6 @@ data:
   EMAIL_ENABLED: 'True'
   EMAIL_USE_TLS: 'True'
   EMAIL_HOST: 'email-smtp.us-east-1.amazonaws.com'
-  EMAIL_PORT: 587
+  EMAIL_PORT: '587'
   EMAIL_TICKET_SYSTEM_ADDRESS: 'help@nese.mghpcc.org'
   EMAIL_ADMIN_LIST: 'help@nese.mghpcc.org'
