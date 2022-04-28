@@ -2,13 +2,25 @@ import os
 import pkgutil
 
 from coldfront.config.settings import *
+from coldfront.config.env import ENV
 
 
-plugin_openstack = pkgutil.get_loader('coldfront_plugin_openstack.config')
-plugin_keycloak_usersearch = pkgutil.get_loader('coldfront_plugin_keycloak_usersearch')
+NERC_STD_PLUGIN_CONFIGS = [
+    'coldfront_plugin_openstack.config',
+    'coldfront_plugin_keycloak_usersearch',
+]
 
-include(plugin_openstack.get_filename())
-include(plugin_keycloak_usersearch.get_filename())
+NERC_ENV_PLUGIN_CONFIGS = ENV.list('NERC_ENV_PLUGIN_CONFIGS', default=[])
+
+NERC_ALL_PLUGIN_CONFIGS = NERC_STD_PLUGIN_CONFIGS + NERC_ENV_PLUGIN_CONFIGS
+for cnf in NERC_ALL_PLUGIN_CONFIGS:
+    ldr = pkgutil.get_loader(cnf)
+    if ldr is not None:
+        include(ldr.get_filename())
+    elif ENV.bool('DEBUG', default=False):
+        # TODO: Should go to log
+        print(f"Plugin {cnf} specified but not found.")
+
 
 ADDITIONAL_USER_SEARCH_CLASSES = ["coldfront_plugin_keycloak_usersearch.search.KeycloakUserSearch"]
 
