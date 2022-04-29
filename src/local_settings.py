@@ -1,6 +1,7 @@
 import os
 import pkgutil
 
+from django.core.exceptions import ImproperlyConfigured
 from coldfront.config.settings import *
 from coldfront.config.env import ENV
 
@@ -17,9 +18,8 @@ for cnf in NERC_ALL_PLUGIN_CONFIGS:
     ldr = pkgutil.get_loader(cnf)
     if ldr is not None:
         include(ldr.get_filename())
-    elif ENV.bool('DEBUG', default=False):
-        # TODO: Should go to log
-        print(f"Plugin {cnf} specified but not found.")
+    else:
+        raise ImproperlyConfigured(f"Plugin {cnf} specified but not found.")
 
 
 ADDITIONAL_USER_SEARCH_CLASSES = ["coldfront_plugin_keycloak_usersearch.search.KeycloakUserSearch"]
