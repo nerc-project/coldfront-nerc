@@ -7,7 +7,7 @@ from coldfront.config.env import ENV
 
 
 NERC_STD_PLUGIN_CONFIGS = [
-    'coldfront_plugin_openstack.config',
+    'coldfront_plugin_cloud.config',
     'coldfront_plugin_keycloak_usersearch',
 ]
 
