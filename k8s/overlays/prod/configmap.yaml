@@ -36,4 +36,8 @@ data:
   EMAIL_DIRECTOR_EMAIL_ADDRESS: 'help@nerc.mghpcc.org'
   EMAIL_PROJECT_REVIEW_CONTACT: 'help@nerc.mghpcc.org'
   EMAIL_DEVELOPMENT_EMAIL_LIST: 'help@nerc.mghpcc.org'
-  EMAIL_SIGNATURE: '''New England Research Cloud (NERC)<br><a href="https://nerc.mghpcc.org/" target="_blank">https://nerc.mghpcc.org/</a><br><a href="https://nerc-project.github.io/nerc-docs/" target="_blank">https://nerc-project.github.io/nerc-docs/</a><br><a href="https://nerc.instatus.com/" target="_blank">https://nerc.instatus.com/</a>'''
+  EMAIL_SIGNATURE: |
+    New England Research Cloud (NERC)
+    https://nerc.mghpcc.org
+    https://nerc-project.github.io/nerc-docs
+    https://nerc.instatus.com
