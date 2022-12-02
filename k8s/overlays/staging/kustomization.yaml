@@ -1,0 +1,10 @@
+namespace: coldfront-staging
+resources:
+  - configmap.yaml
+  - secrets/coldfront.yaml
+  - ha-postgres.yaml
+  - ../../base
+  - ingress.yaml
+patchesStrategicMerge:
+  - patches/coldfront-deployment.yaml
+  - patches/qcluster-deployment.yaml
