@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coldfront-configmap
+data:
+  DEBUG: "False"
+  DATABASE_ENGINE: 'django.db.backends.postgresql'
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_ID: ""
+  OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
+  PLUGIN_AUTH_OIDC: "True"
+  PLUGIN_MOKEY: "True"
+  OIDC_RP_SIGN_ALGO: RS256
+  OIDC_RP_SCOPES: "openid email profile"
+  OIDC_OP_AUTHORIZATION_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/auth"
+  OIDC_OP_TOKEN_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/token"
+  OIDC_OP_USER_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/userinfo"
+  OIDC_OP_JWKS_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/certs"
+  OIDC_AUTHENTICATION_CALLBACK_URL: "https://coldfront-staging.mss.mghpcc.org/oidc/callback/"
+  KEYCLOAK_URL: 'https://keycloak.mss.mghpcc.org'
+  KEYCLOAK_REALM: 'mss'
+  FORWARDED_ALLOW_IPS: '*'
+  REDIS_HOST: 'coldfront-redis'
+  CENTER_NAME: "New England Research Cloud"
+  CENTER_BASE_URL: "https://coldfront-staging.mss.mghpcc.org"
+  CENTER_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
+  CENTER_PROJECT_RENEWAL_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
+  ACCOUNT_CREATION_TEXT: >
+    Any faculty, staff, student, or external collaborator must request an user account through the <a href="https://regapp.mss.mghpcc.org/" target="_blank">MGHPCC Shared Services (MGHPCC-SS) Account Portal</a>. For more information, please see the <a href="https://nerc.mghpcc.org/user-guides/" target="_blank">user guides</a>.
+  EMAIL_ENABLED: 'True'
+  EMAIL_USE_TLS: 'True'
+  EMAIL_HOST: 'email-smtp.us-east-1.amazonaws.com'
+  EMAIL_PORT: '587'
+  EMAIL_TICKET_SYSTEM_ADDRESS: 'help@nerc.mghpcc.org'
+  EMAIL_ADMIN_LIST: 'help@nerc.mghpcc.org'
+  EMAIL_SENDER: 'help@nerc.mghpcc.org'
+  EMAIL_DIRECTOR_EMAIL_ADDRESS: 'help@nerc.mghpcc.org'
+  EMAIL_PROJECT_REVIEW_CONTACT: 'help@nerc.mghpcc.org'
+  EMAIL_DEVELOPMENT_EMAIL_LIST: 'help@nerc.mghpcc.org'
+  EMAIL_SIGNATURE: |
+    New England Research Cloud (NERC)
+    https://nerc.mghpcc.org
+    https://nerc-project.github.io/nerc-docs
+    https://nerc.instatus.com

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: coldfront
+        env:
+          - name: DATABASE_HOST
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: host
+          - name: DATABASE_PORT
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: port
+          - name: DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: dbname
+          - name: DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: user
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                key: password
+        envFrom:
+        - configMapRef:
+            name: coldfront-configmap
+        - secretRef:
+            name: coldfront-secrets
