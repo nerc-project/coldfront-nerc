@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldfront-static-files-deployment
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: coldfront-static-files-copy
+        image: ghcr.io/nerc-project/coldfront-nerc:v0.2.0
