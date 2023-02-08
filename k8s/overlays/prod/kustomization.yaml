@@ -9,4 +9,5 @@ resources:
   - ingress.yaml
 patchesStrategicMerge:
   - patches/coldfront-deployment.yaml
+  - patches/coldfront-static-files-deployment.yaml
   - patches/qcluster-deployment.yaml
