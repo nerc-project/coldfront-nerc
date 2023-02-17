@@ -1,4 +1,4 @@
-git+https://github.com/ubccr/coldfront@2e60db247fd9a9b0d1299f1e98f1e4ef5f5c259b#egg=coldfront
+git+https://github.com/ubccr/coldfront@v1.1.4#egg=coldfront
 git+https://github.com/nerc-project/coldfront-plugin-cloud@v0.2.0#egg=coldfront_plugin_cloud
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@0dd8e0ae65211d2f145abfd8d1402efe96562d29#egg=coldfront_plugin_keycloak_usersearch
 mysqlclient
