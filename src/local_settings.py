@@ -7,6 +7,7 @@ from coldfront.config.env import ENV
 
 
 NERC_STD_PLUGIN_CONFIGS = [
+    'coldfront_plugin_api.config',
     'coldfront_plugin_cloud.config',
     'coldfront_plugin_keycloak_usersearch',
 ]
@@ -46,6 +47,12 @@ DATABASES = {
         'HOST': ENV.get_value('DATABASE_HOST'),
         'PORT': ENV.get_value('DATABASE_PORT', default=3306),
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'mozilla_django_oidc.contrib.drf.OIDCAuthentication',
+    ]
 }
 
 if ENV.get_value('REDIS_HOST', default=None):

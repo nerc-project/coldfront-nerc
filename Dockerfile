@@ -18,6 +18,10 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
+COPY patches/01_add_api_urls.patch /opt/venv/lib/python3.9/site-packages/
+RUN cd /opt/venv/lib/python3.9/site-packages && \
+    patch -p1 < 01_add_api_urls.patch
+
 # Final Image
 FROM python:3.9-slim-bullseye
 
