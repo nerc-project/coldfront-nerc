@@ -1,4 +1,4 @@
-git+https://github.com/ubccr/coldfront@v1.1.4#egg=coldfront
+git+https://github.com/ubccr/coldfront@v1.1.5#egg=coldfront
 git+https://github.com/nerc-project/coldfront-plugin-cloud@v0.3.0#egg=coldfront_plugin_cloud
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@0dd8e0ae65211d2f145abfd8d1402efe96562d29#egg=coldfront_plugin_keycloak_usersearch
 git+https://github.com/nerc-project/coldfront-plugin-api.git@0680de972f36df8cbd37d181a4ca68337a6918f1#egg=coldfront_plugin_api

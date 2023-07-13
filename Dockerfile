@@ -9,7 +9,11 @@ FROM python:3.9-slim-bullseye as builder
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        build-essential default-libmysqlclient-dev libpq-dev git && \
+        build-essential \
+        default-libmysqlclient-dev \
+        libpq-dev \
+        git \
+        pkg-config && \
     apt-get clean -y
 
 RUN python3 -m venv /opt/venv
