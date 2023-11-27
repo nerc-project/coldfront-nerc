@@ -2,7 +2,7 @@ Dear {{center_name}} user,
 
 Your allocation change request for {{resource}} has been denied.
 
-Please login to view a message from the system administrators pertaining to your allocation change request: {{allocation_url}}
+Please login to view a message from the system administrators pertaining to your allocation change request: {{url}}
 
 Thank you,
 {{signature}}
