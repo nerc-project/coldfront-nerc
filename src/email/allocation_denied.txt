@@ -4,5 +4,8 @@ Your allocation request for {{resource}} has been denied.
 
 Please login to view a message from the system administrators: {{url}}
 
+If you are a student or collaborator under this project, you are receiving this
+notice as a courtesy.
+
 Thank you,
 {{signature}}
