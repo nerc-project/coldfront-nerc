@@ -23,7 +23,7 @@ data:
   CENTER_NAME: "New England Research Cloud"
   CENTER_BASE_URL: "https://coldfront.mss.mghpcc.org"
   CENTER_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
-  CENTER_PROJECT_RENEWAL_HELP_URL: "https://nerc.mghpcc.org/user-guides/"
+  CENTER_PROJECT_RENEWAL_HELP_URL: "https://nerc-project.github.io/nerc-docs/get-started/allocation/project-and-allocation-review/"
   ACCOUNT_CREATION_TEXT: >
     Any faculty, staff, student, or external collaborator must request an user account through the <a href="https://regapp.mss.mghpcc.org/" target="_blank">MGHPCC Shared Services (MGHPCC-SS) Account Portal</a>. For more information, please see the <a href="https://nerc.mghpcc.org/user-guides/" target="_blank">user guides</a>.
   EMAIL_ENABLED: 'True'
