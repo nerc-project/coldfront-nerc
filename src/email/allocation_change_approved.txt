@@ -4,5 +4,8 @@ Your allocation change request for {{resource}} has been approved. The requested
 
 To view your allocation's information, please go to {{url}}
 
+If you are a student or collaborator under this project, you are receiving this
+notice as a courtesy.
+
 Thank you,
 {{signature}}
