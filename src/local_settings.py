@@ -4,6 +4,7 @@ import pkgutil
 from django.core.exceptions import ImproperlyConfigured
 from coldfront.config.settings import *
 from coldfront.config.env import ENV
+from coldfront.config.core import ALLOCATION_ATTRIBUTE_VIEW_LIST
 
 
 NERC_STD_PLUGIN_CONFIGS = [
@@ -71,3 +72,8 @@ if ENV.get_value('REDIS_HOST', default=None):
             'port': 6379,
             'db': 0, }
     }
+
+if 'Allocated Project Name' not in ALLOCATION_ATTRIBUTE_VIEW_LIST:
+    ALLOCATION_ATTRIBUTE_VIEW_LIST += [
+        'Allocated Project Name'
+    ]
