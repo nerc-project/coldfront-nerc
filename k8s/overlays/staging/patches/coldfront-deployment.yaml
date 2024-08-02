@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: coldfront
-        image: ghcr.io/nerc-project/coldfront-nerc:v0.3.9
+        image: ghcr.io/nerc-project/coldfront-nerc:v0.3.10
         env:
           - name: DATABASE_HOST
             valueFrom:
