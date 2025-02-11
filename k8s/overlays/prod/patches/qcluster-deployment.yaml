@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: coldfront-qcluster
-        image: ghcr.io/nerc-project/coldfront-nerc:v0.3.10
+        image: ghcr.io/nerc-project/coldfront-nerc:v0.3.11
         env:
           - name: DATABASE_HOST
             valueFrom:
