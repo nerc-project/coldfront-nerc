@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: invoice-cronjob
+spec:
+  schedule: "0 13 1 * 0" # TODO Is this the correct schedule?
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: invoice-cronjob
+              image: ghcr.io/nerc-project/coldfront-nerc:main
+              imagePullPolicy: Always
+              command: ['coldfront']
+              args: ['calculate_storage_gb_hours', '--upload-to-s3']
+              envFrom:
+                - configMapRef:
+                    name: coldfront-configmap
+          restartPolicy: OnFailure
