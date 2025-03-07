@@ -5,7 +5,7 @@
 #   installs netcat and mysql libraries as runtime deps.
 
 # Builder Image
-FROM python:3.9-slim-bullseye as builder
+FROM python:3.12-slim-bullseye as builder
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -22,19 +22,19 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
-COPY patches/01_add_api_urls.patch /opt/venv/lib/python3.9/site-packages/
-COPY patches/02_fix_allocation_denied_revoked_PR596.patch /opt/venv/lib/python3.9/site-packages/
-COPY patches/03_add_active_needs_renewal_status.patch /opt/venv/lib/python3.9/site-packages/
-COPY patches/04_add_allocation_change_request_created_signal.patch /opt/venv/lib/python3.9/site-packages/
+COPY patches/01_add_api_urls.patch /opt/venv/lib/python3.12/site-packages/
+COPY patches/02_fix_allocation_denied_revoked_PR596.patch /opt/venv/lib/python3.12/site-packages/
+COPY patches/03_add_active_needs_renewal_status.patch /opt/venv/lib/python3.12/site-packages/
+COPY patches/04_add_allocation_change_request_created_signal.patch /opt/venv/lib/python3.12/site-packages/
 
-RUN cd /opt/venv/lib/python3.9/site-packages && \
+RUN cd /opt/venv/lib/python3.12/site-packages && \
     patch -p1 < 01_add_api_urls.patch && \
     patch -p1 < 02_fix_allocation_denied_revoked_PR596.patch && \
     patch -p1 < 03_add_active_needs_renewal_status.patch && \
     patch -p1 < 04_add_allocation_change_request_created_signal.patch
 
 # Final Image
-FROM python:3.9-slim-bullseye
+FROM python:3.12-slim-bullseye
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -42,12 +42,12 @@ RUN apt-get update && \
     apt-get clean -y
 
 COPY --from=builder --chown=1001:0 /opt/venv /opt/venv
-COPY src/local_settings.py /opt/venv/lib/python3.9/site-packages
+COPY src/local_settings.py /opt/venv/lib/python3.12/site-packages
 
 COPY src/bin/run_coldfront.sh /opt/venv/bin
 
 # Update NERC's email templates
-COPY src/email/ /opt/venv/lib/python3.9/site-packages/coldfront/templates/email/
+COPY src/email/ /opt/venv/lib/python3.12/site-packages/coldfront/templates/email/
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV DJANGO_SETTINGS_MODULE="local_settings"
