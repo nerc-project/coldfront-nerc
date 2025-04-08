@@ -25,11 +25,13 @@ RUN pip3 install -r /tmp/requirements.txt
 COPY patches/01_add_api_urls.patch /opt/venv/lib/python3.9/site-packages/
 COPY patches/02_fix_allocation_denied_revoked_PR596.patch /opt/venv/lib/python3.9/site-packages/
 COPY patches/03_add_active_needs_renewal_status.patch /opt/venv/lib/python3.9/site-packages/
+COPY patches/04_add_allocation_change_request_created_signal.patch /opt/venv/lib/python3.9/site-packages/
 
 RUN cd /opt/venv/lib/python3.9/site-packages && \
     patch -p1 < 01_add_api_urls.patch && \
     patch -p1 < 02_fix_allocation_denied_revoked_PR596.patch && \
-    patch -p1 < 03_add_active_needs_renewal_status.patch
+    patch -p1 < 03_add_active_needs_renewal_status.patch && \
+    patch -p1 < 04_add_allocation_change_request_created_signal.patch
 
 # Final Image
 FROM python:3.9-slim-bullseye
