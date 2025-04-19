@@ -1,0 +1,84 @@
+diff --git a/coldfront/core/allocation/forms.py b/coldfront/core/allocation/forms.py
+index 9700244..e893e8f 100644
+--- a/coldfront/core/allocation/forms.py
++++ b/coldfront/core/allocation/forms.py
+@@ -1,5 +1,6 @@
+ from django import forms
+ from django.db.models.functions import Lower
++from django.core.exceptions import ValidationError
+ from django.shortcuts import get_object_or_404
+ 
+ from coldfront.core.allocation.models import (Allocation, AllocationAccount,
+@@ -11,6 +12,8 @@ from coldfront.core.project.models import Project
+ from coldfront.core.resource.models import Resource, ResourceType
+ from coldfront.core.utils.common import import_from_settings
+ 
++from coldfront_plugin_cloud import tasks, utils
++
+ ALLOCATION_ACCOUNT_ENABLED = import_from_settings(
+     'ALLOCATION_ACCOUNT_ENABLED', False)
+ ALLOCATION_CHANGE_REQUEST_EXTENSION_DAYS = import_from_settings(
+@@ -201,6 +204,33 @@ class AllocationAttributeChangeForm(forms.Form):
+             allocation_attribute.clean()
+ 
+ 
++class AllocationAttributeChangeFormSet(forms.BaseFormSet):
++    def __init__(self, *args, **kwargs):
++        super().__init__(*args, **kwargs)
++
++    def _validate_openshift_quotas(self):
++        """
++        Performs validation on the OpenShift quotas.
++        For now, only check that current usage is lower than requested quota.
++        """
++        allocation_attribute = AllocationAttribute.objects.get(pk=self.cleaned_data[0].get('pk'))
++        allocation = allocation_attribute.allocation
++        if allocator := tasks.find_allocator(allocation):
++            # Only support Openshift allocations for now
++            if allocator.resource_type == 'openshift':
++                requested_quota = utils.get_new_cloud_quota(self.cleaned_data)
++                cloud_quota_usage = tasks.get_allocation_cloud_usage(allocation.pk)
++                usage_errors = utils.check_cloud_usage_is_lower(requested_quota, cloud_quota_usage)
++
++                if usage_errors:
++                    raise ValidationError(usage_errors)
++
++    def clean(self):
++        if any(self.errors):
++            return
++        self._validate_openshift_quotas()
++
++
+ class AllocationAttributeUpdateForm(forms.Form):
+     change_pk = forms.IntegerField(required=False, disabled=True)
+     attribute_pk = forms.IntegerField(required=False, disabled=True)
+diff --git a/coldfront/core/allocation/views.py b/coldfront/core/allocation/views.py
+index 90f04b8..f5296fe 100644
+--- a/coldfront/core/allocation/views.py
++++ b/coldfront/core/allocation/views.py
+@@ -28,6 +28,7 @@ from coldfront.core.allocation.forms import (AllocationAccountForm,
+                                              AllocationChangeForm,
+                                              AllocationChangeNoteForm,
+                                              AllocationAttributeChangeForm,
++                                             AllocationAttributeChangeFormSet,
+                                              AllocationAttributeUpdateForm,
+                                              AllocationForm,
+                                              AllocationInvoiceNoteDeleteForm,
+@@ -1786,7 +1787,7 @@ class AllocationChangeView(LoginRequiredMixin, UserPassesTestMixin, FormView):
+ 
+         if allocation_attributes_to_change:
+             formset = formset_factory(self.formset_class, max_num=len(
+-                allocation_attributes_to_change))
++                allocation_attributes_to_change), formset=AllocationAttributeChangeFormSet)
+             formset = formset(
+                 request.POST, initial=allocation_attributes_to_change, prefix='attributeform')
+ 
+@@ -1796,6 +1797,8 @@ class AllocationChangeView(LoginRequiredMixin, UserPassesTestMixin, FormView):
+                     messages.error(request, error)
+                 for error in formset.errors:
+                     if error: attribute_errors += error.get('__all__')
++                for error in formset.non_form_errors():
++                    messages.error(request, error)
+                 messages.error(request, attribute_errors)
+                 return HttpResponseRedirect(reverse('allocation-change', kwargs={'pk': pk}))
+             form_data = form.cleaned_data
