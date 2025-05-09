@@ -3,6 +3,6 @@ git+https://github.com/nerc-project/coldfront-plugin-cloud@v0.8.0#egg=coldfront_
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@d5f02df7bef5b4ab787d3ebb21cd11f3c133138f#egg=coldfront_plugin_keycloak_usersearch
 git+https://github.com/nerc-project/coldfront-plugin-api.git@v0.2.2#egg=coldfront_plugin_api
 mysqlclient
-psycopg2 >= 2.8, < 2.9
+psycopg2
 mozilla-django-oidc
 gunicorn
