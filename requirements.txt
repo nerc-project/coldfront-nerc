@@ -1,5 +1,5 @@
 git+https://github.com/ubccr/coldfront@v1.1.6#egg=coldfront
-git+https://github.com/nerc-project/coldfront-plugin-cloud@v0.9.0#egg=coldfront_plugin_cloud
+git+https://github.com/nerc-project/coldfront-plugin-cloud@v0.9.1#egg=coldfront_plugin_cloud
 git+https://github.com/nerc-project/coldfront-plugin-keycloak@d5f02df7bef5b4ab787d3ebb21cd11f3c133138f#egg=coldfront_plugin_keycloak_usersearch
 git+https://github.com/nerc-project/coldfront-plugin-api.git@v0.2.2#egg=coldfront_plugin_api
 mysqlclient
