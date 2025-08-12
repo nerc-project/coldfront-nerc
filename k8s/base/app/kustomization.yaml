@@ -4,4 +4,4 @@ resources:
   - service.yaml
   - redis-service.yaml
   - qcluster-deployment.yaml
-
+  - invoice-cronjob.yaml

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: invoice-cronjob
+spec:
+  schedule: "0 6 1,7,15,23 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: invoice-cronjob
+              image: ghcr.io/nerc-project/coldfront-nerc:main
+              imagePullPolicy: Always
+              command: ['coldfront']
+              args: ['calculate_storage_gb_hours', '--upload-to-s3']
+              envFrom:
+                - configMapRef:
+                    name: coldfront-configmap
+          restartPolicy: OnFailure
