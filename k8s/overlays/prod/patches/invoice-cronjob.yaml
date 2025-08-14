@@ -37,5 +37,9 @@ spec:
                     name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
                     key: password
             envFrom:
+            - configMapRef:
+                name: coldfront-configmap
+            - secretRef:
+                name: coldfront-secrets
             - secretRef:
                 name: storage-invoice-s3-secrets

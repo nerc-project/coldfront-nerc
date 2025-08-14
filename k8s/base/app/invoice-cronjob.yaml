@@ -13,7 +13,7 @@ spec:
               image: ghcr.io/nerc-project/coldfront-nerc:main
               imagePullPolicy: Always
               command: ['coldfront']
-              args: ['calculate_storage_gb_hours', '--upload-to-s3']
+              args: ['calculate_storage_gb_hours', '--upload-to-s3', '--output', '/tmp/invoice.csv']
               envFrom:
                 - configMapRef:
                     name: coldfront-configmap
