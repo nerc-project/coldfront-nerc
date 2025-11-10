@@ -1,26 +1,25 @@
 diff --git a/coldfront/core/allocation/management/commands/add_allocation_defaults.py b/coldfront/core/allocation/management/commands/add_allocation_defaults.py
-index ca5c4fc..556eeb2 100644
+index 9f7dc01..3fd2fa7 100644
 --- a/coldfront/core/allocation/management/commands/add_allocation_defaults.py
 +++ b/coldfront/core/allocation/management/commands/add_allocation_defaults.py
-@@ -16,7 +16,7 @@ class Command(BaseCommand):
-             'Attribute Expanded Text'):
-             AttributeType.objects.get_or_create(name=attribute_type)
- 
--        for choice in ('Active', 'Denied', 'Expired',
-+        for choice in ('Active (Needs Renewal)', 'Active', 'Denied', 'Expired',
-                        'New', 'Paid', 'Payment Pending',
-                        'Payment Requested', 'Payment Declined',
-                        'Renewal Requested', 'Revoked', 'Unpaid',):
+@@ -22,6 +22,7 @@ class Command(BaseCommand):
+
+         for choice in (
+             "Active",
++            "Active (Needs Renewal)",
+             "Denied",
+             "Expired",
+             "New",
 diff --git a/coldfront/core/allocation/tasks.py b/coldfront/core/allocation/tasks.py
-index e1a37fc..ba96800 100644
+index 883420a..3247ce3 100644
 --- a/coldfront/core/allocation/tasks.py
 +++ b/coldfront/core/allocation/tasks.py
-@@ -29,7 +29,7 @@ EMAIL_ADMIN_LIST = import_from_settings('EMAIL_ADMIN_LIST')
+@@ -36,7 +36,7 @@ EMAIL_ALLOCATION_EULA_IGNORE_OPT_OUT = import_from_settings("EMAIL_ALLOCATION_EU
+
+
  def update_statuses():
- 
-     expired_status_choice = AllocationStatusChoice.objects.get(
--        name='Expired')
-+        name='Active (Needs Renewal)')
+-    expired_status_choice = AllocationStatusChoice.objects.get(name="Expired")
++    expired_status_choice = AllocationStatusChoice.objects.get(name="Active (Needs Renewal)")
      allocations_to_expire = Allocation.objects.filter(
-         status__name__in=['Active','Payment Pending','Payment Requested', 'Unpaid',], end_date__lt=datetime.datetime.now().date())
-     for sub_obj in allocations_to_expire:
+         status__name__in=[
+             "Active",
