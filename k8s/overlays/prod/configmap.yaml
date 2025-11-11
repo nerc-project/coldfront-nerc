@@ -9,6 +9,7 @@ data:
   OPENSTACK_DEVSTACK_APPLICATION_CREDENTIAL_SECRET: ""
   PLUGIN_AUTH_OIDC: "True"
   PLUGIN_MOKEY: "True"
+  MOKEY_OIDC_PI_GROUP: "pi"
   OIDC_RP_SIGN_ALGO: RS256
   OIDC_RP_SCOPES: "openid email profile"
   OIDC_OP_AUTHORIZATION_ENDPOINT: "https://keycloak.mss.mghpcc.org/auth/realms/mss/protocol/openid-connect/auth"
