@@ -1,0 +1,49 @@
+diff --git a/coldfront/core/allocation/templates/allocation/allocation_detail.html b/coldfront/core/allocation/templates/allocation/allocation_detail.html
+--- a/coldfront/core/allocation/templates/allocation/allocation_detail.html
++++ b/coldfront/core/allocation/templates/allocation/allocation_detail.html
+@@ -173,6 +173,24 @@
+   </div>
+ </div>
+ 
++<!-- NERC Usage Chart -->
++<div class="card mb-3">
++  <div class="card-header">
++    <h3 class="d-inline"><i class="fas fa-chart-bar" aria-hidden="true"></i> SU Costs</h3>
++  </div>
++  <div class="card-body">
++    <!-- Chart info header section -->
++    <div class="d-flex justify-content-between align-items-start mb-3 chart-info-header">
++      <div>
++        <h5 class="mb-1 font-weight-bold chart-title" id="chart-title">SU Cost - Cumulative</h5>
++        <p class="mb-0 text-muted small" id="chart-subtitle">Showing the cumulative cost for the last month</p>
++      </div>
++    </div>
++    <div id="chart-view" style="position: relative; height: 500px; width: 100%;">
++      <canvas id="allocationUsageChart"></canvas>
++    </div>
++  </div>
++</div>
++
+ {% if eulas %}
+ <div class="card mb-3">
+   <div class="card-header">
+@@ -426,7 +444,6 @@
+ 
+ {{ guage_data|json_script:"guage-data" }}
+ 
+-
+ <script>
+   $(document).ready(function () {
+     var guage_data = JSON.parse(document.getElementById('guage-data').textContent);
+@@ -477,4 +494,10 @@
+     }
+   })
+ </script>
++
++<!-- Load Chart.js for NERC usage visualization -->
++<script src="{% static 'chartjs/chart.min.js' %}"></script>
++<script src="{% static 'js/chart_utils.js' %}"></script>
++<script src="{% static 'js/chart_config.js' %}"></script>
++<script src="{% static 'js/allocation_detail.js' %}"></script>
+ {% endblock %}
+
