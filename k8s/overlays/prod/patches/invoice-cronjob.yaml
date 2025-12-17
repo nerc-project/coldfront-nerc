@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: invoice-cronjob
 spec:
+  schedule: "0 7 * * *"
   jobTemplate:
     spec:
       template:
