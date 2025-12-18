@@ -8,6 +8,7 @@ resources:
   - ha-postgres.yaml
   - ../../base
   - ingress.yaml
+  - cronjob-fetch-daily-billable-usage.yaml
 patchesStrategicMerge:
   - patches/coldfront-deployment.yaml
   - patches/coldfront-static-files-deployment.yaml
