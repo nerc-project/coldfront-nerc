@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: fetch-daily-billable-usage-cronjob
-              image: ghcr.io/nerc-project/coldfront-nerc:v0.6.2
+              image: ghcr.io/nerc-project/coldfront-nerc:v0.6.3
               imagePullPolicy: Always
               command: ['coldfront']
               args: ['fetch_daily_billable_usage']
