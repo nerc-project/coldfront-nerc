@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: fetch-daily-billable-usage-cronjob
+spec:
+  schedule: "0 8 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: fetch-daily-billable-usage-cronjob
+              image: ghcr.io/nerc-project/coldfront-nerc:v0.6.1
+              imagePullPolicy: Always
+              command: ['coldfront']
+              args: ['fetch_daily_billable_usage']
+              env:
+                - name: DATABASE_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                      key: host
+                - name: DATABASE_PORT
+                  valueFrom:
+                    secretKeyRef:
+                      name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                      key: port
+                - name: DATABASE_NAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                      key: dbname
+                - name: DATABASE_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                      key: user
+                - name: DATABASE_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: coldfront-postgres-ha-pguser-coldfront-postgres-ha
+                      key: password
+              envFrom:
+                - configMapRef:
+                    name: coldfront-configmap
+                - secretRef:
+                    name: coldfront-secrets
+                - secretRef:
+                    name: storage-invoice-s3-secrets
+          restartPolicy: Never
