@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chart Test Fixture</title>
+  <script src="../../chartjs/chart.min.js"></script>
+  <script src="../../js/chart_config.js"></script>
+  <script src="../../js/chart_utils.js"></script>
+  <script src="../../js/chart_tooltip.js"></script>
+  <script src="../../js/allocation_detail.js"></script>
+  <link rel="stylesheet" href="../../css/chart_controls.css">
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #chart-view { height: 400px; position: relative; }
+  </style>
+</head>
+<body>
+  <!-- Data injected per test via <script id="charges-data"> -->
+  <div id="su-costs-card">
+    <div id="chart-view">
+      <canvas id="allocationUsageChart"></canvas>
+    </div>
+  </div>
+</body>
+</html>
