@@ -8,7 +8,7 @@
 const toGrayscale = ChartUtils.toGrayscale;
 
 const getOrCreateTooltip = (chart) => {
-  let tooltipEl = chart.canvas.parentNode.querySelector('div');
+  let tooltipEl = chart.canvas.parentNode.querySelector('#chartjs-tooltip');
 
   if (!tooltipEl) {
     tooltipEl = document.createElement('div');
@@ -57,10 +57,14 @@ const externalTooltipHandler = (context) => {
     let hasMissingData = false;
     
     bodyLines.forEach((body, i) => {
-      const dataset = chart.data.datasets[i];
-      const dataPoint = tooltip.dataPoints[i]; 
-      
+      const dataPoint = tooltip.dataPoints[i];
+
       if (!dataPoint) return;
+
+      // Use datasetIndex rather than i — tooltip.dataPoints only contains
+      // visible datasets, so i no longer maps 1:1 to chart.data.datasets
+      // when any dataset has been hidden via the legend.
+      const dataset = chart.data.datasets[dataPoint.datasetIndex];
       
       // Check if this data point is missing/interpolated
       const dataIndex = dataPoint.dataIndex;

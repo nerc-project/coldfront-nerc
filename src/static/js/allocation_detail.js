@@ -28,6 +28,9 @@ const getHoverColor = ChartUtils.getHoverColor;
 // DEV MODE: Set to true to use mock raw data (simulates backend data)
 const DEV_USE_MOCK_RAW_DATA = false;
 
+// DEV MODE: Set to true to log raw and transformed chart data to the console
+const DEV_VERBOSE_LOGGING = false;
+
 // Mock data in CumulativeChargesDict format (same as backend would provide)
 function generateMockRawData() {
   const now = new Date();
@@ -134,9 +137,7 @@ function loadUsageDataFromDOM() {
   if (chargesDataElement) {
     try {
       rawData = JSON.parse(chargesDataElement.textContent);
-      if (rawData && Object.keys(rawData).length > 0) {
-        console.log('[NERC Chart] Using REAL data from backend');
-      } else {
+      if (!rawData || Object.keys(rawData).length === 0) {
         rawData = null;
       }
     } catch (e) {
@@ -150,14 +151,15 @@ function loadUsageDataFromDOM() {
     console.log('[NERC Chart] Using DEV MOCK data (set DEV_USE_MOCK_RAW_DATA=false to disable)');
   }
   
-  if (!rawData) {
-    console.log('[NERC Chart] No data available');
-    return null;
-  }
+  if (!rawData) return null;
   
-  console.log('[NERC Chart] Raw data:', rawData);
+  if (DEV_VERBOSE_LOGGING) {
+    console.log('[NERC Chart] Raw data:', rawData);
+  }
   const transformed = transformCumulativeCharges(rawData);
-  console.log('[NERC Chart] Transformed data:', transformed);
+  if (DEV_VERBOSE_LOGGING) {
+    console.log('[NERC Chart] Transformed data:', transformed);
+  }
   return transformed;
 }
 
@@ -177,7 +179,6 @@ if (usageChartData && usageChartData.datasets.length > 0) {
 const suCostsCard = document.getElementById('su-costs-card');
 if (suCostsCard && usageDatasets.length === 0) {
   suCostsCard.style.display = 'none';
-  console.log('[NERC Chart] No data available - hiding costs card');
 }
 
 let currentDataMode = 'cumulative';
@@ -308,8 +309,12 @@ function populateUsageTable(datasets) {
   });
   tbody.innerHTML = bodyRows;
 
-  // Initialize DataTable (matching allocationuser_table style)
-  if (typeof $ !== 'undefined' && $.fn.DataTable) {
+  // Only initialize DataTable when the container is visible; if the table is
+  // hidden, DataTables will mis-measure column widths. The table button click
+  // handler is responsible for initializing it on first reveal.
+  const tableContainer = document.getElementById('table-view');
+  const isTableVisible = tableContainer && tableContainer.style.display !== 'none';
+  if (isTableVisible && typeof $ !== 'undefined' && $.fn.DataTable) {
     dataTableInstance = $('#allocationUsageTable').DataTable({
       'aoColumnDefs': [{
         'bSortable': false,
@@ -341,6 +346,19 @@ if (graphBtn && tableBtn && chartView && tableView) {
     tableView.style.display = 'block';
     graphBtn.classList.remove('active');
     tableBtn.classList.add('active');
+
+    if (typeof $ !== 'undefined' && $.fn.DataTable) {
+      if (!dataTableInstance) {
+        dataTableInstance = $('#allocationUsageTable').DataTable({
+          'aoColumnDefs': [{
+            'bSortable': false,
+            'aTargets': ['nosort']
+          }]
+        });
+      } else {
+        dataTableInstance.columns.adjust().draw(false);
+      }
+    }
   });
 }
 
@@ -378,7 +396,7 @@ if (ctx) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      devicePixelRatio: Math.max(window.devicePixelRatio || 1, 3),
+      devicePixelRatio: window.devicePixelRatio || 1,
       onResize: function(chart, size) {
         // Force tick recalculation on resize by updating the chart
         chart.update('none');
@@ -518,7 +536,7 @@ if (ctx) {
   const chartSubtitle = document.getElementById('chart-subtitle');
   
   const modeConfig = {
-    cumulative: { title: 'SU Cost - Cumulative', subtitle: 'Showing the cumulative cost for thismonth' },
+    cumulative: { title: 'SU Cost - Cumulative', subtitle: 'Showing the cumulative cost for this month' },
     daily: { title: 'SU Cost - Daily', subtitle: 'Showing the daily cost for this month' }
   };
 

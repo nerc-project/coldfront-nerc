@@ -126,126 +126,6 @@
   outline: none !important;
 }
 
-/* DataTables bottom row - flexbox layout */
-#allocationUsageTable_wrapper .row:last-child {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-top: 16px !important;
-  padding: 0 !important;
-}
-
-/* Override Bootstrap columns in bottom row */
-#allocationUsageTable_wrapper .row:last-child > [class*="col"] {
-  flex: 0 0 auto !important;
-  width: auto !important;
-  max-width: none !important;
-  padding: 0 !important;
-}
-
-/* Push pagination column to right */
-#allocationUsageTable_wrapper .row:last-child > [class*="col"]:last-child {
-  margin-left: auto !important;
-}
-
-/* Info text - left side */
-.dataTables_wrapper .dataTables_info {
-  font-size: 13px !important;
-  color: #888 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* DataTables pagination - right side */
-.dataTables_wrapper .dataTables_paginate {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  padding: 3px !important;
-  margin: 0 !important;
-}
-
-/* Pagination container - flex wrapper for all elements */
-.dataTables_wrapper .dataTables_paginate .pagination-container {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-
-}
-
-/* Arrow wrapper */
-.dataTables_wrapper .dataTables_paginate .pagination-arrow-wrapper {
-  display: flex !important;
-  align-items: center !important;
-}
-
-/* Reset page-item */
-.dataTables_wrapper .dataTables_paginate .page-item {
-  margin: 0 !important;
-  list-style: none !important;
-}
-
-/* Base page-link styling - shared by all buttons */
-.dataTables_wrapper .dataTables_paginate .page-link {
-  border: none !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #888 !important;
-  border-radius: 6px !important;
-  box-shadow: none !important;
-  transition: all 0.2s ease !important;
-  padding: 8px 14px !important;
-  line-height: 1.2 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-decoration: none !important;
-  background: #f0f0f0 !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .page-link:hover {
-  background: #e0e0e0 !important;
-  color: #555 !important;
-  text-decoration: none !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .page-link:focus {
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* Page numbers group - gray pill container */
-.dataTables_wrapper .dataTables_paginate .page-numbers-group {
-  display: flex !important;
-  align-items: center !important;
-  background: #f0f0f0 !important;
-  border-radius: 8px !important;
-  padding: 3px !important;
-  gap: 0 !important;
-}
-
-/* Page numbers inside group - transparent bg, pill handles background */
-.dataTables_wrapper .dataTables_paginate .page-numbers-group .page-link {
-  background: transparent !important;
-  border-radius: 6px !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .page-numbers-group .page-link:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Active page number */
-.dataTables_wrapper .dataTables_paginate .page-numbers-group .page-item.active .page-link {
-  background: #fff !important;
-  color: #333 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Arrow buttons - use base styling, just override border-radius */
-.dataTables_wrapper .dataTables_paginate .pagination-prev .page-link,
-.dataTables_wrapper .dataTables_paginate .pagination-next .page-link {
-  border-radius: 8px !important;
-}
 
 /* ========================================
    RESPONSIVE BREAKPOINTS
@@ -264,26 +144,6 @@
 
   #chart-subtitle {
     font-size: 0.8rem !important;
-  }
-
-  /* Usage table font sizes */
-  #allocationUsageTable {
-    font-size: 12px !important;
-  }
-
-  #allocationUsageTable th,
-  #allocationUsageTable td {
-    padding: 6px 8px !important;
-    font-size: 12px !important; 
-  }
-
-  /* Sorting arrow spacing */
-  #allocationUsageTable thead th.sorting,
-  #allocationUsageTable thead th.sorting_asc,
-  #allocationUsageTable thead th.sorting_desc {
-    padding-right: 18px !important;
-    background-position: right 4px center !important;
-    background-size: 10px !important;
   }
 
   .pill-item {
@@ -307,15 +167,6 @@
     font-size: 12px;
     border-radius: 6px;
   }
-
-  .dataTables_wrapper .dataTables_info {
-    font-size: 12px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .page-link {
-    font-size: 12px !important;
-    padding: 6px 10px !important;
-  }
 }
 
 /* Small screens (large phones) - icon only for view toggle and export */
@@ -326,26 +177,6 @@
 
   #chart-subtitle {
     font-size: 0.75rem !important;
-  }
-
-  /* Usage table font sizes */
-  #allocationUsageTable {
-    font-size: 11px !important;
-  }
-
-  #allocationUsageTable th,
-  #allocationUsageTable td {
-    padding: 5px 6px !important;
-    font-size: 11px !important;
-  }
-
-  /* Sorting arrow spacing */
-  #allocationUsageTable thead th.sorting,
-  #allocationUsageTable thead th.sorting_asc,
-  #allocationUsageTable thead th.sorting_desc {
-    padding-right: 14px !important;
-    background-position: right 2px center !important;
-    background-size: 8px !important;
   }
 
   .pill-item {
@@ -400,25 +231,6 @@
     font-size: 16px;
     margin-right: 0 !important;
   }
-
-  .dataTables_wrapper .dataTables_info {
-    font-size: 11px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .page-link {
-    font-size: 11px !important;
-    padding: 5px 8px !important;
-    border-radius: 4px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .page-numbers-group {
-    border-radius: 6px !important;
-    padding: 2px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .pagination-container {
-    gap: 6px !important;
-  }
 }
 
 /* Extra small screens (small phones) - compact icon-only */
@@ -429,26 +241,6 @@
 
   #chart-subtitle {
     font-size: 0.7rem !important;
-  }
-
-  /* Usage table font sizes */
-  #allocationUsageTable {
-    font-size: 10px !important;
-  }
-
-  #allocationUsageTable th,
-  #allocationUsageTable td {
-    padding: 4px 5px !important;
-    font-size: 10px !important;
-  }
-
-  /* Sorting arrow spacing */
-  #allocationUsageTable thead th.sorting,
-  #allocationUsageTable thead th.sorting_asc,
-  #allocationUsageTable thead th.sorting_desc {
-    padding-right: 12px !important;
-    background-position: right 1px center !important;
-    background-size: 7px !important;
   }
 
   /* Chart height responsive */
@@ -486,19 +278,20 @@
   .export-csv-btn i {
     font-size: 14px;
   }
-
-  .dataTables_wrapper .dataTables_info {
-    font-size: 10px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .page-link {
-    font-size: 10px !important;
-    padding: 4px 6px !important;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .pagination-container {
-    gap: 4px !important;
-  }
 }
 
+/* ========================================
+   CANVAS RENDERING - High DPI support
+   ======================================== */
+
+#chart-view {
+  /* GPU acceleration for smoother rendering */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+#allocationUsageChart {
+  /* Let browser use best quality scaling */
+  image-rendering: auto;
+}
 

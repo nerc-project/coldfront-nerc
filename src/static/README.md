@@ -46,7 +46,7 @@ npm test
 
 ## Visual Test Notes
 
-The first time you run visual tests, Playwright creates baseline screenshots in `tests/visual/snapshots/`. Commit those to git so CI and future runs have something to compare against.
+The first time you run visual tests, Playwright creates baseline screenshots in `tests/visual/snapshots/`.
 
 If you intentionally change how the chart looks and need to refresh the baselines:
 

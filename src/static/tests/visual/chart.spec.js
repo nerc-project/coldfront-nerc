@@ -99,6 +99,19 @@ const MISSING_DATA = {
   '2025-02-05': { 'OpenStack CPU SU': '72.10', 'OpenStack GPU A100 SU': '39.20', 'OpenShift Storage SU': '20.50' },
 };
 
+// Three consecutive missing days between two known values.
+// Used to assert that all missing points in a run are filled with the same
+// midpoint value (flat plateau) rather than a linear ramp across the gap.
+const CONSECUTIVE_MISSING_DATA = {
+  '2025-02-01': { 'OpenStack CPU SU': '10.00' },
+  '2025-02-02': {},
+  '2025-02-03': {},
+  '2025-02-04': {},
+  '2025-02-05': { 'OpenStack CPU SU': '50.00' },
+  '2025-02-06': { 'OpenStack CPU SU': '65.00' },
+  '2025-02-07': { 'OpenStack CPU SU': '80.00' },
+};
+
 // -----------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------
@@ -137,12 +150,46 @@ for (const bp of BREAKPOINTS) {
       // Visual regression catches the grayscale plugin output
       await expect(page).toHaveScreenshot(`missing-data-${bp.name}.png`);
     });
+
+    test('renders grayscale regions for consecutive missing data', async ({ page }) => {
+      await injectDataAndRender(page, CONSECUTIVE_MISSING_DATA);
+      await expect(page.locator('#allocationUsageChart')).toBeVisible();
+      await expect(page).toHaveScreenshot(`consecutive-missing-data-${bp.name}.png`);
+    });
   });
 }
 
 // -----------------------------------------------------------------------
 // Functional behaviour tests (not breakpoint-specific)
 // -----------------------------------------------------------------------
+
+// Consecutive nulls are intentionally filled with the midpoint of the nearest
+// surrounding valid values — a flat plateau across the gap. This is preferable
+// to linear interpolation because the grayscale overlay already signals that
+// the data is absent; a ramp would imply a known trend where none exists.
+test('interpolateMissingData fills a consecutive null run with a flat midpoint plateau', async ({ page }) => {
+  await page.goto(FIXTURE_URL);
+  const result = await page.evaluate(() => {
+    // [10, null, null, null, 50] — three consecutive missing points
+    const { data, missingIndices } = ChartUtils.interpolateMissingData([10, null, null, null, 50]);
+    // Set is not JSON-serialisable, convert before returning across the evaluate boundary
+    return { data, missingIndices: [...missingIndices] };
+  });
+
+  const midpoint = (10 + 50) / 2; // 30
+  expect(result.data[1]).toBeCloseTo(midpoint);
+  expect(result.data[2]).toBeCloseTo(midpoint);
+  expect(result.data[3]).toBeCloseTo(midpoint);
+
+  // All three indices must be marked as missing so the grayscale overlay covers them
+  expect(result.missingIndices).toContain(1);
+  expect(result.missingIndices).toContain(2);
+  expect(result.missingIndices).toContain(3);
+
+  // Boundary values must be untouched
+  expect(result.data[0]).toBe(10);
+  expect(result.data[4]).toBe(50);
+});
 
 test('cumulative-to-daily toggle updates the chart', async ({ page }) => {
   await page.goto(FIXTURE_URL);

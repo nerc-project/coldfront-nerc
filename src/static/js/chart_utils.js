@@ -83,7 +83,10 @@ const ChartUtils = (function() {
           nextValue = data[nextIndex];
         }
 
-        // Interpolate midpoint
+        // All points in a consecutive null run receive the same midpoint value,
+        // producing a flat plateau. This is intentional: the grayscale overlay
+        // already signals missing data, and a flat line makes the gap more
+        // visually distinct than a ramp that could imply a known trend.
         if (prevValue !== null && nextValue !== null) {
           interpolated[i] = (prevValue + nextValue) / 2;
         } else if (prevValue !== null) {
@@ -455,12 +458,23 @@ const ChartUtils = (function() {
       });
       
       missingRegions.forEach(({ start, end }) => {
-        const startX = scales.x.getPixelForValue(start);
-        const width = scales.x.getPixelForValue(end) - startX;
-        const height = chartArea.bottom - chartArea.top;
-        if (width <= 0) return;
-        
-        const imageData = ctx.getImageData(startX, chartArea.top, width, height);
+        const rawStartX = scales.x.getPixelForValue(start);
+        const rawEndX   = scales.x.getPixelForValue(end);
+
+        // Clamp to the chart area so the rectangle never exceeds the canvas,
+        // then snap to integer pixel boundaries. getImageData/putImageData
+        // require non-negative integers and throw an IndexSizeError otherwise.
+        const clampedStartX = Math.max(chartArea.left,  Math.min(rawStartX, chartArea.right));
+        const clampedEndX   = Math.max(chartArea.left,  Math.min(rawEndX,   chartArea.right));
+
+        const x = Math.floor(clampedStartX);
+        const y = Math.floor(chartArea.top);
+        const w = Math.ceil(clampedEndX) - x;
+        const h = Math.ceil(chartArea.bottom) - y;
+
+        if (w <= 0 || h <= 0) return;
+
+        const imageData = ctx.getImageData(x, y, w, h);
         const pixels = imageData.data;
         for (let i = 0; i < pixels.length; i += 4) {
           if (pixels[i + 3] > 0) {
@@ -468,7 +482,7 @@ const ChartUtils = (function() {
             pixels[i] = pixels[i + 1] = pixels[i + 2] = gray;
           }
         }
-        ctx.putImageData(imageData, startX, chartArea.top);
+        ctx.putImageData(imageData, x, y);
       });
     }
   };
