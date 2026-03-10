@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: invoice-cronjob
-            image: ghcr.io/nerc-project/coldfront-nerc:v0.6.4
+            image: ghcr.io/nerc-project/coldfront-nerc:v0.7.0
             env:
               - name: DATABASE_HOST
                 valueFrom:
