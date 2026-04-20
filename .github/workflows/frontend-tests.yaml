@@ -1,0 +1,77 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "src/static/**"
+      - "package.json"
+      - "vitest.config.js"
+      - "playwright.config.js"
+      - ".github/workflows/frontend-tests.yaml"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "src/static/**"
+      - "package.json"
+      - "vitest.config.js"
+      - "playwright.config.js"
+      - ".github/workflows/frontend-tests.yaml"
+
+jobs:
+  unit-tests:
+    name: Unit Tests (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/static/package-lock.json
+
+      - run: npm ci
+        working-directory: src/static
+
+      - run: npm run test:unit
+        working-directory: src/static
+
+  visual-tests:
+    name: Visual Tests (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/static/package-lock.json
+
+      - run: npm ci
+        working-directory: src/static
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+        working-directory: src/static
+
+      - name: Run visual tests
+        run: npm run test:visual
+        working-directory: src/static
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-screenshots
+          path: src/static/tests/visual/test-results/
+          retention-days: 7
+
+      - name: Upload snapshot updates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-snapshots
+          path: src/static/tests/visual/snapshots/
+          retention-days: 30
