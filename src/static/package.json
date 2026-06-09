@@ -1,0 +1,13 @@
+{
+    "type": "module",
+    "scripts": {
+      "test:unit": "vitest run",
+      "test:visual": "playwright test tests/visual",
+      "test": "npm run test:unit && npm run test:visual"
+    },
+    "devDependencies": {
+      "vitest": "^2.0.0",
+      "jsdom": "^24.0.0",
+      "@playwright/test": "^1.44.0"
+    }
+  }
